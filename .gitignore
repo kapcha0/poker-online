@@ -1,0 +1,65 @@
+# ---------- Unity (client/) ----------
+client/[Ll]ibrary/
+client/[Tt]emp/
+client/[Oo]bj/
+client/[Bb]uild/
+client/[Bb]uilds/
+client/[Ll]ogs/
+client/[Uu]ser[Ss]ettings/
+client/[Mm]emoryCaptures/
+client/[Rr]ecordings/
+client/[Aa]ssets/AssetStoreTools*
+client/*.csproj
+client/*.sln
+client/*.user
+client/*.pidb
+client/*.booproj
+client/*.svd
+client/*.pdb
+client/*.mdb
+client/*.opendb
+client/*.VC.db
+client/.vs/
+client/.gradle/
+client/.idea/
+client/crashlytics-build.properties
+client/sysinfo.txt
+client/Assets/StreamingAssets/aa.meta
+client/Assets/StreamingAssets/aa/*
+client/.utmp/
+client/.consulo/
+
+# Unity build artifacts
+client/[Bb]uilds/
+client/[Bb]uild/
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# ---------- Node / server ----------
+node_modules/
+server/dist/
+server/build/
+server/coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+
+# ---------- Docs / temp ----------
+docs/_build/
+
+# ---------- OS / IDE ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# ---------- Secrets ----------
+*.keystore
+*.jks
+keystore.properties
+secrets/

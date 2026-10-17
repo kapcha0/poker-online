@@ -67,9 +67,11 @@ server/coverage/
 # ---------- Docs / temp ----------
 docs/_build/
 
-# ---------- .NET (shared/) ----------
+# ---------- .NET (shared/, tools/) ----------
 shared/**/bin/
 shared/**/obj/
+tools/**/bin/
+tools/**/obj/
 [Bb]uild/
 [Bb]uilds/
 artifacts/

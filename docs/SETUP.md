@@ -41,7 +41,8 @@
 |---|---|
 | `dotnet build shared/PokerCore/PokerCore.csproj` | ✅ 0 ошибок, 0 предупреждений |
 | `dotnet test shared/PokerCore.Tests` | ✅ 27 из 27 тестов (24 + 3 property-based) |
-| `dotnet run --project tools/ClientSim` | ✅ 8 674 раздачи, 0 нелегальных действий бота, 0 зависаний |
+| `dotnet run --project tools/ClientSim` | ✅ 13 839 раздач (8 674 хедз-ап + 5 165 за столом на 6 мест), 0 нелегальных действий, 0 зависаний |
+| `powershell -File tools/check-client-compiles.ps1` | ✅ 0 ошибок, 0 предупреждений (141 сборка Unity) |
 | Android SDK, собранный вручную | ✅ 11 из 11 компонентов, 9.42 ГБ, 45 948 файлов |
 | Редактор Unity запускается | ✅ `ProductVersion 6000.3.10f1_e35f0c77bd8e` |
 | Сборка через Unity `-batchmode` | ❌ код 198 — `No valid Unity Editor license found` |

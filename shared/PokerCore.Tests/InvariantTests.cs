@@ -89,7 +89,9 @@ namespace PokerCore.Tests
 
             for (int seed = 0; seed < 120; seed++)
             {
-                int playerCount = rng.Next(2, 6);
+                // До 9 игроков: за полным столом появляется несколько уровней
+                // сайд-потов, что и является самым багованным местом в покере.
+                int playerCount = rng.Next(2, 10);
                 var stacks = new long[playerCount];
                 for (int i = 0; i < playerCount; i++)
                 {

@@ -30,6 +30,7 @@ namespace ClientSim
             failures += CheckEncoding();
             failures += CheckLocalisationKeys();
             failures += CheckBotIntegration();
+            failures += CheckBotMultiway();
 
             Console.WriteLine(failures == 0 ? "RESULT: OK" : "RESULT: FAILED");
             return failures == 0 ? 0 : 1;
@@ -182,6 +183,93 @@ namespace ClientSim
             Console.WriteLine($"hands played: {handsPlayed}");
             Console.WriteLine($"illegal bot actions: {illegal}");
             Console.WriteLine($"stuck/aborted hands: {stuck}");
+
+            return illegal + stuck;
+        }
+
+        /// <summary>
+        /// The bot does not only play heads-up: a real table seats several players.
+        /// This plays full six-handed tables with the bot on every seat, which is
+        /// where multi-level side pots actually occur.
+        /// </summary>
+        private static int CheckBotMultiway()
+        {
+            const int Seats = 6;
+            long total = Stack * Seats;
+            int handsPlayed = 0;
+            int illegal = 0;
+            int stuck = 0;
+
+            for (int seed = 0; seed < 200; seed++)
+            {
+                var players = new List<Player>();
+                for (int seat = 0; seat < Seats; seat++)
+                {
+                    players.Add(new Player(seat, "P" + (seat + 1), Stack));
+                }
+
+                var game = new TexasHoldemGame(players, 10, 20);
+
+                for (int hand = 0; hand < HandsPerSeed; hand++)
+                {
+                    if (game.Players.Count(p => p.Chips > 0) < 2)
+                    {
+                        break;
+                    }
+
+                    game.StartHand(new SeededRandomSource(seed * 77 + hand));
+
+                    int guard = 0;
+                    while (game.Street != Street.HandComplete && guard++ < 500)
+                    {
+                        int active = game.ActiveSeat;
+                        if (active < 0)
+                        {
+                            Console.WriteLine($"six-max seed={seed} hand={hand}: no active seat");
+                            stuck++;
+                            break;
+                        }
+
+                        try
+                        {
+                            game.ApplyAction(active, Bot.Decide(game, active));
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(
+                                $"six-max seed={seed} hand={hand} seat={active}: bot returned an illegal action -> {ex.Message}");
+                            illegal++;
+                            break;
+                        }
+
+                        long live = game.Players.Sum(p => p.Chips + p.TotalCommitted);
+                        if (live != total)
+                        {
+                            Console.WriteLine($"six-max seed={seed} hand={hand}: chip leak, live={live} expected={total}");
+                            return 1;
+                        }
+                    }
+
+                    if (game.Street != Street.HandComplete)
+                    {
+                        Console.WriteLine($"six-max seed={seed} hand={hand}: hand stuck on {game.Street}");
+                        stuck++;
+                        break;
+                    }
+
+                    if (game.Players.Sum(p => p.Chips) != total)
+                    {
+                        Console.WriteLine($"six-max seed={seed} hand={hand}: chips not conserved after the award");
+                        return 1;
+                    }
+
+                    handsPlayed++;
+                }
+            }
+
+            Console.WriteLine($"six-max hands played: {handsPlayed}");
+            Console.WriteLine($"six-max illegal bot actions: {illegal}");
+            Console.WriteLine($"six-max stuck/aborted hands: {stuck}");
 
             return illegal + stuck;
         }

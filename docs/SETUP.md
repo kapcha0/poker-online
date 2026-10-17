@@ -177,3 +177,10 @@ C:\UnityEditors\6000.3.10f1\Editor\Unity.exe -batchmode -nographics -quit ^
   (`Library/` весит гигабайты и постоянно перезаписывается).
 - На этом ПК наблюдались проблемы с проверкой отзыва TLS-сертификатов
   (`CRYPT_E_REVOCATION_OFFLINE`) и с BITS — для загрузок использовался `curl.exe`.
+- `client/PokerOnline/Packages/manifest.json` зафиксирован **вручную** и содержит только
+  встроенные в редактор пакеты (`com.unity.modules.*` + `com.unity.ugui`), версии взяты
+  из `Editor\Data\Resources\PackageManager\BuiltinPackages\*\package.json`.
+  Причина: глобальный кэш пакетов Unity пуст, а сеть на этом ПК нестабильна —
+  сгенерированный Unity манифест тянул бы `com.unity.ide.visualstudio`,
+  `com.unity.collab-proxy`, `com.unity.timeline` и т.п. из интернета и мог застрять.
+  С нашим манифестом первый импорт проекта проходит **полностью офлайн**.

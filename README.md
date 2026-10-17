@@ -45,3 +45,34 @@ poker-online/
 
 См. `docs/SETUP.md`. Кратко: Unity 6 LTS + Android-модули, Visual Studio 2022,
 Android Studio Emulator, Git, Node.js LTS, Docker (позже).
+
+## Как собрать и запустить (локально)
+
+### 1. Ядро правил (PokerCore)
+
+Доменная логика покера вынесена в `shared/PokerCore` (чистый C#, без Unity) и покрыта тестами.
+
+```powershell
+dotnet test shared/PokerCore.Tests/PokerCore.Tests.csproj
+```
+
+### 2. Unity-клиент
+
+Открыть проект `client/PokerOnline` в Unity 6.3 LTS (или собрать из командной строки):
+
+```powershell
+# Собрать DLL ядра в Plugins клиента
+powershell -ExecutionPolicy Bypass -File tools/build-pokercore.ps1
+
+# Собрать Windows-билд (batchmode)
+& "C:\UnityEditors\6000.3.10f1\Editor\Unity.exe" -batchmode -quit `
+  -projectPath client/PokerOnline `
+  -logFile build/unity-build.log `
+  -executeMethod PokerOnline.EditorTools.BuildScript.BuildWindows
+```
+
+Готовый .exe появится в `build/windows/PokerOnline.exe`.
+
+> Игровой стол MVP сейчас рисуется на IMGUI — это осознанное решение, чтобы
+> прототип гарантированно запускался и в Play Mode, и в собранном билде.
+> Красивый UI (uGUI/UI Toolkit) — отдельная задача этапа 2.

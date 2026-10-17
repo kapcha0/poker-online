@@ -8,6 +8,23 @@ client/[Ll]ogs/
 client/[Uu]ser[Ss]ettings/
 client/[Mm]emoryCaptures/
 client/[Rr]ecordings/
+client/PokerOnline/[Ll]ibrary/
+client/PokerOnline/[Tt]emp/
+client/PokerOnline/[Bb]uild*/
+client/PokerOnline/[Ll]ogs/
+client/PokerOnline/[Oo]bj/
+client/PokerOnline/[Uu]ser[Ss]ettings/
+client/PokerOnline/*.csproj
+client/PokerOnline/*.sln
+client/PokerOnline/*.user
+client/PokerOnline/*.pidb
+client/PokerOnline/*.booproj
+client/PokerOnline/*.svd
+client/PokerOnline/*.pdb
+client/PokerOnline/*.mdb
+client/PokerOnline/.vs/
+client/PokerOnline/.gradle/
+client/PokerOnline/.idea/
 client/[Aa]ssets/AssetStoreTools*
 client/*.csproj
 client/*.sln
@@ -49,6 +66,13 @@ server/coverage/
 
 # ---------- Docs / temp ----------
 docs/_build/
+
+# ---------- .NET (shared/) ----------
+shared/**/bin/
+shared/**/obj/
+[Bb]uild/
+[Bb]uilds/
+artifacts/
 
 # ---------- OS / IDE ----------
 .DS_Store

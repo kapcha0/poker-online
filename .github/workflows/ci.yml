@@ -7,10 +7,25 @@ on:
     branches: [main, develop]
 
 jobs:
-  # Заглушка: на этапе 0 проверяем, что CI вообще запускается.
-  # Реальные сборка/тесты Unity и сервера добавятся на этапах 1 и 6.
+  core-tests:
+    name: PokerCore (build + tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build PokerCore
+        run: dotnet build shared/PokerCore/PokerCore.csproj -c Release
+
+      - name: Run tests
+        run: dotnet test shared/PokerCore.Tests/PokerCore.Tests.csproj -c Release --logger "console;verbosity=normal"
+
   sanity:
-    name: Sanity checks
+    name: Repo layout
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

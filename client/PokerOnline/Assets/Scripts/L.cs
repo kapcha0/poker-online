@@ -38,6 +38,7 @@ namespace PokerOnline
             { "river", "Ривер" },
             { "showdown", "Вскрытие" },
             { "handOver", "Раздача завершена" },
+            { "handcomplete", "Раздача завершена" },
             { "langToggle", "EN" },
             { "resetStacks", "Сброс стеков" },
         };
@@ -67,6 +68,7 @@ namespace PokerOnline
             { "river", "River" },
             { "showdown", "Showdown" },
             { "handOver", "Hand complete" },
+            { "handcomplete", "Hand complete" },
             { "langToggle", "RU" },
             { "resetStacks", "Reset stacks" },
         };

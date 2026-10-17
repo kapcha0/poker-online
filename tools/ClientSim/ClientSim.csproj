@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Headless integration test for the Unity client's bot.
+    Bot.cs and L.cs only depend on PokerCore, so this project compiles and runs
+    them on the desktop .NET runtime - no Unity required. It is wired into CI.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>ClientSim</AssemblyName>
+    <RootNamespace>ClientSim</RootNamespace>
+    <NoWarn>CS8632;CS0169;CS0649</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\client\PokerOnline\Assets\Scripts\Bot.cs" />
+    <Compile Include="..\..\client\PokerOnline\Assets\Scripts\L.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\PokerCore\PokerCore.csproj" />
+  </ItemGroup>
+
+</Project>

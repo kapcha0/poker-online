@@ -24,6 +24,9 @@ jobs:
       - name: Run tests
         run: dotnet test shared/PokerCore.Tests/PokerCore.Tests.csproj -c Release --logger "console;verbosity=normal"
 
+      - name: Client bot headless simulation
+        run: dotnet run --project tools/ClientSim/ClientSim.csproj -c Release
+
   sanity:
     name: Repo layout
     runs-on: ubuntu-latest

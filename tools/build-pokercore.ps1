@@ -1,4 +1,4 @@
-# Собирает PokerCore в DLL (netstandard2.1) и кладёт её в Plugins Unity-клиента.
+﻿# Собирает PokerCore в DLL (netstandard2.1) и кладёт её в Plugins Unity-клиента.
 # Использование:  powershell -ExecutionPolicy Bypass -File tools/build-pokercore.ps1
 param(
     [string]$Configuration = "Release"

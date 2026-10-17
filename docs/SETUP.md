@@ -168,6 +168,15 @@ C:\UnityEditors\6000.3.10f1\Editor\Unity.exe -batchmode -nographics -quit ^
 
 Проверка окружения (реальные команды, без заглушек): `powershell -File tools/verify-env.ps1`
 
+### Проверка клиента без лицензии Unity
+```
+powershell -File tools/check-client-compiles.ps1
+```
+Скрипт компилирует `Assets\Scripts` и `Assets\Editor` тем же компилятором (Roslyn) и
+против тех же сборок `UnityEngine`/`UnityEditor`, что использует редактор. Это позволяет
+проверять клиентский код на ошибки API **не тратя лицензию и минуты на импорт проекта**.
+Проверено: клиентские скрипты компилируются — 0 ошибок, 0 предупреждений.
+
 ---
 
 ## Заметки по среде
